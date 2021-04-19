@@ -1,6 +1,6 @@
 import os, sys
 
-osname = os.uname()[0] + os.uname()[1]
+osname = os.uname()[0] + ' ' + os.uname()[1]
 kernel = os.uname()[2]
 arch = os.uname()[4]
 encoding = os.device_encoding(0)
