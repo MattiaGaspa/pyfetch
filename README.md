@@ -1,2 +1,2 @@
 # pythonfetch
-A python version of neofetch
+A revisited python version of neofetch
