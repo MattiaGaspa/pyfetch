@@ -25,7 +25,8 @@ encoding = os.device_encoding(0)
 pythonv = sys.version[0] + sys.version[1] + sys.version[2] + sys.version[3] + sys.version[4] + sys.version[5]
 cpu_number = os.cpu_count()
 
-print()
+print(username + '@' + os.uname()[1])
+print('--------------------------')
 print('OS:', osname, arch)
 print('Kernel:', kernel)
 print('Uptime: %s' % uptime())
