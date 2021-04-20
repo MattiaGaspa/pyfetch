@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, sys
+import os, sys, psutil
 
 username = os.environ['USER']
 osname = os.uname()[0] + ' ' + os.uname()[1]
@@ -25,6 +25,17 @@ lang = os.environ['LANGUAGE']
 encoding = os.device_encoding(0)
 pythonv = sys.version[0] + sys.version[1] + sys.version[2] + sys.version[3] + sys.version[4] + sys.version[5]
 cpu_number = os.cpu_count()
+ram = psutil.virtual_memory().total
+used_ram = psutil.virtual_memory().used
+swap = psutil.swap_memory().total
+used_swap = psutil.swap_memory().used
+def convert(bytes):
+    unitIndex = 0
+    units = ['B','KB','MB','GB','TB']
+    while 1000 <= bytes:
+        bytes /= 1000
+        unitIndex += 1
+    return f"{round(bytes)}{units[unitIndex]}"
 
 print(username + '@' + os.uname()[1])
 print('--------------------------')
@@ -37,3 +48,5 @@ print('Language:', lang)
 print('Encoding:', encoding)
 print('Python version:', pythonv)
 print('CPU number:', cpu_number)
+print('Memory:', convert(used_ram) + '/' + convert(ram))
+print('Swap:', convert(used_swap) + '/' + convert(swap))
