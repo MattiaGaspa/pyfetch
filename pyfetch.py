@@ -64,18 +64,18 @@ logo = {
     ]
 }
 
-print(username + '@' + os.uname()[1])
-print('-' * len(username + '@' + os.uname()[1]))
-print(logo[os.uname()[1]][0] + color[os.uname()[1]] + 'OS' + color["normal"] + ':', osname, arch)
-print(logo[os.uname()[1]][1] + color[os.uname()[1]] + 'Kernel' + color["normal"] + ':', kernel)
-print(logo[os.uname()[1]][2] + color[os.uname()[1]] + 'Uptime' + color["normal"] + ': %s' % uptime())
-print(logo[os.uname()[1]][3] + color[os.uname()[1]] + 'Shell' + color["normal"] + ':', shell)
-print(logo[os.uname()[1]][4] + color[os.uname()[1]] + 'Editor' + color["normal"] + ':', editor)
-print(logo[os.uname()[1]][5] + color[os.uname()[1]] + 'Language' + color["normal"] + ':', lang)
-print(logo[os.uname()[1]][6] + color[os.uname()[1]] + 'Encoding' + color["normal"] + ':', encoding)
-print(logo[os.uname()[1]][7] + color[os.uname()[1]] + 'Python version' + color["normal"] + ':', pythonv)
-print(logo[os.uname()[1]][8] + color[os.uname()[1]] + 'CPU number' + color["normal"] + ':', cpu_number)
-print(logo[os.uname()[1]][9] + color[os.uname()[1]] + 'Memory' + color["normal"] + ':', convert(used_ram) + '/' + convert(ram))
-print(logo[os.uname()[1]][10] + color[os.uname()[1]] + 'Swap' + color["normal"] + ':', convert(used_swap) + '/' + convert(swap))
-for i in range(11, len(logo[os.uname()[1]])):
+print(logo[os.uname()[1]][0] + color[os.uname()[1]] + username + color["normal"] + '@' + color[os.uname()[1]] + os.uname()[1] + color["normal"])
+print(logo[os.uname()[1]][1] + ('-' * len(username + '@' + os.uname()[1])))
+print(logo[os.uname()[1]][2] + color[os.uname()[1]] + 'OS' + color["normal"] + ':', osname, arch)
+print(logo[os.uname()[1]][3] + color[os.uname()[1]] + 'Kernel' + color["normal"] + ':', kernel)
+print(logo[os.uname()[1]][4] + color[os.uname()[1]] + 'Uptime' + color["normal"] + ': %s' % uptime())
+print(logo[os.uname()[1]][5] + color[os.uname()[1]] + 'Shell' + color["normal"] + ':', shell)
+print(logo[os.uname()[1]][6] + color[os.uname()[1]] + 'Editor' + color["normal"] + ':', editor)
+print(logo[os.uname()[1]][7] + color[os.uname()[1]] + 'Language' + color["normal"] + ':', lang)
+print(logo[os.uname()[1]][8] + color[os.uname()[1]] + 'Encoding' + color["normal"] + ':', encoding)
+print(logo[os.uname()[1]][9] + color[os.uname()[1]] + 'Python version' + color["normal"] + ':', pythonv)
+print(logo[os.uname()[1]][10] + color[os.uname()[1]] + 'CPU number' + color["normal"] + ':', cpu_number)
+print(logo[os.uname()[1]][11] + color[os.uname()[1]] + 'Memory' + color["normal"] + ':', convert(used_ram) + '/' + convert(ram))
+print(logo[os.uname()[1]][12] + color[os.uname()[1]] + 'Swap' + color["normal"] + ':', convert(used_swap) + '/' + convert(swap))
+for i in range(13, len(logo[os.uname()[1]])):
     print(logo[os.uname()[1]][i])
