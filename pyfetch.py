@@ -27,8 +27,10 @@ pythonv = sys.version[0] + sys.version[1] + sys.version[2] + sys.version[3] + sy
 cpu_number = os.cpu_count()
 ram = psutil.virtual_memory().total
 used_ram = psutil.virtual_memory().used
+ram_percent = psutil.virtual_memory().percent
 swap = psutil.swap_memory().total
 used_swap = psutil.swap_memory().used
+swap_percent = psutil.swap_memory().percent
 def convert(bytes):
     unitIndex = 0
     units = ['B','KB','MB','GB','TB']
@@ -40,13 +42,14 @@ def convert(bytes):
 color = {
     'normal': '\u001b[00;0m',
     'arch': '\u001b[36;1m',
+    'debian': '\u001b[31;1m'
     'gentoo': '\u001b[35;1m',
     'manjaro': '\u001b[32;1m',
     'ubuntu': '\u001b[31;1m'
 }
 logo = {
     'arch': [
-        '\u001b[36;1m                    y:\u001b[00;0m\t\t\t\t',
+        '                    \u001b[36;1my:\u001b[00;0m\t\t\t\t',
         '                  \u001b[36;1msMN-\u001b[00;0m\t\t\t\t',
         '                 \u001b[36;1m+MMMm`\u001b[00;0m\t\t\t\t',
         '                \u001b[36;1m/MMMMMd`\u001b[00;0m\t\t\t',
@@ -66,6 +69,25 @@ logo = {
         '  \u001b[36;1m/NMMMNds+:.`\u001b[00;0m             \u001b[36;1m`-/oymMMMm.\u001b[00;0m\t\t',
         ' \u001b[36;1m+Mmy/.\u001b[00;0m                          \u001b[36;1m`:smN:\u001b[00;0m\t\t',
         '\u001b[36;1m/+.\u001b[00;0m                                  \u001b[36;1m-o.\u001b[00;0m\t'],
+    'debian': [
+        '       \u001b[00;1m_,met$$$$$gg.\t\t',
+        '    \u001b[00;1m,g$$$$$$$$$$$$$$$P.\t\t',
+        '  \u001b[00;1m,g$$P"     """Y$$.".\t\t',
+        ' \u001b[00;1m,$$P\'              `$$$.\t',
+        '\u001b[00;1m,$$P       ,ggs.     `$$b:\t',
+        '\u001b[00;1m`d$$\'     ,$P"\'   \u001b[31;1m.\u001b[00;1m    $$$\t',
+        ' \u001b[00;1m$$P      d$\'     \u001b[31;1m,\u001b[00;1m    $$P\t',
+        ' \u001b[00;1m$$:      $$.   \u001b[31;1m-\u001b[00;1m    ,d$$\'\t',
+        ' \u001b[00;1m$$;      Y$b._   _,d$P\'\t',
+        ' \u001b[00;1mY$$.    \u001b[31;1m`.\u001b[00;1m`"Y$$$$P"\'\t\t',
+        ' \u001b[00;1m`$$b      \u001b[31;1m"-.__\u001b[00;1m\t\t',
+        '  \u001b[00;1m`Y$$\t\t\t\t',
+        '   \u001b[00;1m`Y$$.\t\t\t',
+        '     \u001b[00;1m`$$b.\t\t\t',
+        '       \u001b[00;1m`Y$$b.\t\t\t',
+        '          \u001b[00;1m`"Y$b._\t\t',
+        '              \u001b[00;1m`"""\t\t'
+    ],
     'gentoo': [
         '         \u001b[35;1m-/oyddmdhs+:.\u001b[00;1m\t\t\t',
         '     \u001b[35;1m-o\u001b[00;1mdNMMMMMMMMNNmhy+\u001b[35;1m-`\u001b[00;0m\t\t',
@@ -85,22 +107,23 @@ logo = {
         '\u001b[35;1m/h\u001b[00;1mMMNNNNNNNNMNdhs++/\u001b[35;1m-`\u001b[00;0m\t\t\t',
         '\u001b[35;1m`/\u001b[00;1mohdmmddhys+++/:\u001b[35;1m.`\u001b[00;0m\t\t\t',
         '  \u001b[35;1m`-//////:--.\u001b[00;1m\t\t\t\t'],
-    'manjaro': ['\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m            \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
-                '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t'],
+    'manjaro': [
+        '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m            \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
+        '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t'],
     'ubuntu': [
-        '\u001b[31;1m            .-/+oossssoo+/-.\u001b[00;1m\t\t\t',
+        '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t',
         '        \u001b[31;1m`:+ssssssssssssssssss+:`\u001b[00;1m\t\t',
         '      \u001b[31;1m-+ssssssssssssssssssyyssss+-\u001b[00;1m\t\t',
         '    \u001b[31;1m.ossssssssssssssssss\u001b[00;1mdMMMNy\u001b[31;1msssso.\u001b[00;1m\t\t',
@@ -133,7 +156,7 @@ print(logo[os.uname()[1]][7] + color[os.uname()[1]] + 'Language' + color["normal
 print(logo[os.uname()[1]][8] + color[os.uname()[1]] + 'Encoding' + color["normal"] + ':', encoding)
 print(logo[os.uname()[1]][9] + color[os.uname()[1]] + 'Python version' + color["normal"] + ':', pythonv)
 print(logo[os.uname()[1]][10] + color[os.uname()[1]] + 'CPU number' + color["normal"] + ':', cpu_number)
-print(logo[os.uname()[1]][11] + color[os.uname()[1]] + 'Memory' + color["normal"] + ':', convert(used_ram) + '/' + convert(ram))
-print(logo[os.uname()[1]][12] + color[os.uname()[1]] + 'Swap' + color["normal"] + ':', convert(used_swap) + '/' + convert(swap))
+print(logo[os.uname()[1]][11] + color[os.uname()[1]] + 'Memory' + color["normal"] + ':', convert(used_ram) + '/' + convert(ram), str(ram_percent) + '%')
+print(logo[os.uname()[1]][12] + color[os.uname()[1]] + 'Swap' + color["normal"] + ':', convert(used_swap) + '/' + convert(swap), str(swap_percent) + '%')
 for i in range(13, len(logo[os.uname()[1]])):
     print(logo[os.uname()[1]][i])
