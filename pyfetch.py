@@ -9,20 +9,7 @@ arch = os.uname()[4]
 
 kernel = os.uname()[2]
 
-def uptime():
-    time = int(float(open('/proc/uptime').read().split(' ')[0]) - (float(open('/proc/uptime').read().split(' ')[0]) % 1))
-    d = int(time / 86400)
-    h = int(time / 3600 % 24)
-    m = int(time / 60 % 60)
-
-    uptime = ''
-    if d > 1:
-        uptime += str(d) + ' days '
-    if h > 1:
-        uptime += str(h) + ' hours '
-    if m > 1:
-        uptime += str(m) + ' mins '
-    return uptime
+uptime = int(float(open('/proc/uptime').read().split(' ')[0]) - (float(open('/proc/uptime').read().split(' ')[0]) % 1))
 
 shell = os.environ['SHELL']
 
@@ -45,6 +32,21 @@ ram_percent = psutil.virtual_memory().percent
 swap = psutil.swap_memory().total
 used_swap = psutil.swap_memory().used
 swap_percent = psutil.swap_memory().percent
+
+def secs_to_other(time):
+    d = int(time / 86400)
+    h = int(time / 3600 % 24)
+    m = int(time / 60 % 60)
+
+    time = ''
+    if d > 1:
+        time += str(d) + ' days '
+    if h > 1:
+        time += str(h) + ' hours '
+    if m > 1:
+        time += str(m) + ' mins '
+    return time
+
 def convert(bytes):
     unitIndex = 0
     units = ['B','KB','MB','GB','TB']
@@ -52,6 +54,11 @@ def convert(bytes):
         bytes /= 1000
         unitIndex += 1
     return f"{round(bytes)}{units[unitIndex]}"
+
+if psutil.sensors_battery().power_plugged:
+    batt_stat = 'plugged ({}%)'.format(int(psutil.sensors_battery().percent))
+else:
+    batt_stat = str(int(psutil.sensors_battery().percent)) + '% (' + secs_to_other(psutil.sensors_battery().secsleft) + 'left)'
 
 color = {
     'normal': '\u001b[00;0m',
@@ -163,7 +170,7 @@ print(logo[os.uname()[1]][0] + color[os.uname()[1]] + username + color["normal"]
 print(logo[os.uname()[1]][1] + ('-' * len(username + '@' + os.uname()[1])))
 print(logo[os.uname()[1]][2] + color[os.uname()[1]] + 'OS' + color["normal"] + ':', osname, arch)
 print(logo[os.uname()[1]][3] + color[os.uname()[1]] + 'Kernel' + color["normal"] + ':', kernel)
-print(logo[os.uname()[1]][4] + color[os.uname()[1]] + 'Uptime' + color["normal"] + ': %s' % uptime())
+print(logo[os.uname()[1]][4] + color[os.uname()[1]] + 'Uptime' + color["normal"] + ': %s' % secs_to_other(uptime))
 print(logo[os.uname()[1]][5] + color[os.uname()[1]] + 'Shell' + color["normal"] + ':', shell)
 print(logo[os.uname()[1]][6] + color[os.uname()[1]] + 'Editor' + color["normal"] + ':', editor)
 print(logo[os.uname()[1]][7] + color[os.uname()[1]] + 'Language' + color["normal"] + ':', lang)
@@ -172,5 +179,6 @@ print(logo[os.uname()[1]][9] + color[os.uname()[1]] + 'Python version' + color["
 print(logo[os.uname()[1]][10] + color[os.uname()[1]] + 'CPU' + color["normal"] + ':', '(' + str(cpu_number) + ')', '@', str(cpu_current_clock) + 'GHz', '/', str(cpu_max_clock) + 'GHz')
 print(logo[os.uname()[1]][11] + color[os.uname()[1]] + 'Memory' + color["normal"] + ':', convert(used_ram), '/', convert(ram), str(ram_percent) + '%')
 print(logo[os.uname()[1]][12] + color[os.uname()[1]] + 'Swap' + color["normal"] + ':', convert(used_swap), '/', convert(swap), str(swap_percent) + '%')
-for i in range(13, len(logo[os.uname()[1]])):
+print(logo[os.uname()[1]][13] + color[os.uname()[1]] + 'Battery' + color["normal"] + ':', batt_stat)
+for i in range(14, len(logo[os.uname()[1]])):
     print(logo[os.uname()[1]][i])
