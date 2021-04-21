@@ -39,9 +39,31 @@ def convert(bytes):
 
 color = {
     'normal': '\u001b[00;0m',
+    'arch': '\u001b[36;1m',
     'gentoo': '\u001b[35;1m'
 }
 logo = {
+    'arch': [
+        '\u001b[36;1m                    y:\u001b[00;0m\t\t\t\t',
+        '                  \u001b[36;1msMN-\u001b[00;0m\t\t\t\t',
+        '                 \u001b[36;1m+MMMm`\u001b[00;0m\t\t\t\t',
+        '                \u001b[36;1m/MMMMMd`\u001b[00;0m\t\t\t',
+        '               \u001b[36;1m:NMMMMMMy\u001b[00;0m\t\t\t',
+        '              \u001b[36;1m-NMMMMMMMMs\u001b[00;0m\t\t\t',
+        '             \u001b[36;1m.NMMMMMMMMMM+\u001b[00;0m\t\t\t',
+        '            \u001b[36;1m.mMMMMMMMMMMMM+\u001b[00;0m\t\t\t',
+        '            \u001b[36;1moNMMMMMMMMMMMMM+\u001b[00;0m\t\t\t',
+        '          \u001b[36;1m`+:-+NMMMMMMMMMMMM+\u001b[00;0m\t\t\t',
+        '          \u001b[36;1m.sNMNhNMMMMMMMMMMMM/\u001b[00;0m\t\t\t',
+        '        \u001b[36;1m`hho/sNMMMMMMMMMMMMMMM/\u001b[00;0m\t\t\t',
+        '       \u001b[36;1m`.`omMMmMMMMMMMMMMMMMMMM+\u001b[00;0m\t\t',
+        '      \u001b[36;1m.mMNdshMMMMd+::oNMMMMMMMMMo\u001b[00;0m\t\t',
+        '     \u001b[36;1m.mMMMMMMMMM+\u001b[00;0m     \u001b[36;1m`yMMMMMMMMMs\u001b[00;0m\t\t',
+        '    \u001b[36;1m.NMMMMMMMMM/\u001b[00;0m        \u001b[36;1myMMMMMMMMMy\u001b[00;0m\t\t',
+        '   \u001b[36;1m-NMMMMMMMMMh\u001b[00;0m         \u001b[36;1m`mNMMMMMMMMd`\u001b[00;0m\t\t',
+        '  \u001b[36;1m/NMMMNds+:.`\u001b[00;0m             \u001b[36;1m`-/oymMMMm.\u001b[00;0m\t\t',
+        ' \u001b[36;1m+Mmy/.\u001b[00;0m                          \u001b[36;1m`:smN:\u001b[00;0m\t\t',
+        '\u001b[36;1m/+.\u001b[00;0m                                  \u001b[36;1m-o.\u001b[00;0m\t'],
     'gentoo': [
         '         \u001b[35;1m-/oyddmdhs+:.\u001b[00;1m\t\t\t',
         '     \u001b[35;1m-o\u001b[00;1mdNMMMMMMMMNNmhy+\u001b[35;1m-`\u001b[00;0m\t\t',
@@ -60,8 +82,7 @@ logo = {
         '\u001b[35;1myM\u001b[00;1mMNNNNNNNmmmmmNNMmhs+/\u001b[35;1m-`\u001b[00;0m\t\t',
         '\u001b[35;1m/h\u001b[00;1mMMNNNNNNNNMNdhs++/\u001b[35;1m-`\u001b[00;0m\t\t\t',
         '\u001b[35;1m`/\u001b[00;1mohdmmddhys+++/:\u001b[35;1m.`\u001b[00;0m\t\t\t',
-        '  \u001b[35;1m`-//////:--.\u001b[00;1m\t\t\t\t'
-    ]
+        '  \u001b[35;1m`-//////:--.\u001b[00;1m\t\t\t\t']
 }
 
 print(logo[os.uname()[1]][0] + color[os.uname()[1]] + username + color["normal"] + '@' + color[os.uname()[1]] + os.uname()[1] + color["normal"])
