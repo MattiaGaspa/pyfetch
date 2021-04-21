@@ -2,9 +2,13 @@
 import os, sys, psutil
 
 username = os.environ['USER']
+
 osname = os.uname()[0] + ' ' + os.uname()[1]
+
 arch = os.uname()[4]
+
 kernel = os.uname()[2]
+
 def uptime():
     time = int(float(open('/proc/uptime').read().split(' ')[0]) - (float(open('/proc/uptime').read().split(' ')[0]) % 1))
     d = int(time / 86400)
@@ -19,15 +23,25 @@ def uptime():
     if m > 1:
         uptime += str(m) + ' mins '
     return uptime
+
 shell = os.environ['SHELL']
+
 editor = os.environ['EDITOR']
+
 lang = os.environ['LANGUAGE']
+
 encoding = os.device_encoding(0)
+
 pythonv = sys.version[0] + sys.version[1] + sys.version[2] + sys.version[3] + sys.version[4] + sys.version[5]
+
 cpu_number = os.cpu_count()
+cpu_current_clock = int(psutil.cpu_freq().current)
+cpu_max_clock = psutil.cpu_freq().max
+
 ram = psutil.virtual_memory().total
 used_ram = psutil.virtual_memory().used
 ram_percent = psutil.virtual_memory().percent
+
 swap = psutil.swap_memory().total
 used_swap = psutil.swap_memory().used
 swap_percent = psutil.swap_memory().percent
@@ -42,7 +56,7 @@ def convert(bytes):
 color = {
     'normal': '\u001b[00;0m',
     'arch': '\u001b[36;1m',
-    'debian': '\u001b[31;1m'
+    'debian': '\u001b[31;1m',
     'gentoo': '\u001b[35;1m',
     'manjaro': '\u001b[32;1m',
     'ubuntu': '\u001b[31;1m'
@@ -155,8 +169,8 @@ print(logo[os.uname()[1]][6] + color[os.uname()[1]] + 'Editor' + color["normal"]
 print(logo[os.uname()[1]][7] + color[os.uname()[1]] + 'Language' + color["normal"] + ':', lang)
 print(logo[os.uname()[1]][8] + color[os.uname()[1]] + 'Encoding' + color["normal"] + ':', encoding)
 print(logo[os.uname()[1]][9] + color[os.uname()[1]] + 'Python version' + color["normal"] + ':', pythonv)
-print(logo[os.uname()[1]][10] + color[os.uname()[1]] + 'CPU number' + color["normal"] + ':', cpu_number)
-print(logo[os.uname()[1]][11] + color[os.uname()[1]] + 'Memory' + color["normal"] + ':', convert(used_ram) + '/' + convert(ram), str(ram_percent) + '%')
-print(logo[os.uname()[1]][12] + color[os.uname()[1]] + 'Swap' + color["normal"] + ':', convert(used_swap) + '/' + convert(swap), str(swap_percent) + '%')
+print(logo[os.uname()[1]][10] + color[os.uname()[1]] + 'CPU' + color["normal"] + ':', '(' + str(cpu_number) + ')', '@', str(cpu_current_clock) + 'GHz', '/', str(cpu_max_clock) + 'GHz')
+print(logo[os.uname()[1]][11] + color[os.uname()[1]] + 'Memory' + color["normal"] + ':', convert(used_ram), '/', convert(ram), str(ram_percent) + '%')
+print(logo[os.uname()[1]][12] + color[os.uname()[1]] + 'Swap' + color["normal"] + ':', convert(used_swap), '/', convert(swap), str(swap_percent) + '%')
 for i in range(13, len(logo[os.uname()[1]])):
     print(logo[os.uname()[1]][i])
