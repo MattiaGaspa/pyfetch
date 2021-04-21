@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-import os, sys, psutil
+import os, sys, psutil, distro
 
 username = os.environ['USER']
 
-osname = os.uname()[0] + ' ' + os.uname()[1]
+osname = distro.linux_distribution()[0] + '/Linux ' + distro.linux_distribution()[1]
 
 arch = os.uname()[4]
 
@@ -62,14 +62,14 @@ else:
 
 color = {
     'normal': '\u001b[00;0m',
-    'arch': '\u001b[36;1m',
-    'debian': '\u001b[31;1m',
-    'gentoo': '\u001b[35;1m',
-    'manjaro': '\u001b[32;1m',
-    'ubuntu': '\u001b[31;1m'
+    'Arch': '\u001b[36;1m',
+    'Debian': '\u001b[31;1m',
+    'Gentoo': '\u001b[35;1m',
+    'Manjaro': '\u001b[32;1m',
+    'Ubuntu': '\u001b[31;1m'
 }
 logo = {
-    'arch': [
+    'Arch': [
         '                    \u001b[36;1my:\u001b[00;0m\t\t\t\t',
         '                  \u001b[36;1msMN-\u001b[00;0m\t\t\t\t',
         '                 \u001b[36;1m+MMMm`\u001b[00;0m\t\t\t\t',
@@ -90,7 +90,7 @@ logo = {
         '  \u001b[36;1m/NMMMNds+:.`\u001b[00;0m             \u001b[36;1m`-/oymMMMm.\u001b[00;0m\t\t',
         ' \u001b[36;1m+Mmy/.\u001b[00;0m                          \u001b[36;1m`:smN:\u001b[00;0m\t\t',
         '\u001b[36;1m/+.\u001b[00;0m                                  \u001b[36;1m-o.\u001b[00;0m\t'],
-    'debian': [
+    'Debian': [
         '       \u001b[00;1m_,met$$$$$gg.\t\t',
         '    \u001b[00;1m,g$$$$$$$$$$$$$$$P.\t\t',
         '  \u001b[00;1m,g$$P"     """Y$$.".\t\t',
@@ -109,7 +109,7 @@ logo = {
         '          \u001b[00;1m`"Y$b._\t\t',
         '              \u001b[00;1m`"""\t\t'
     ],
-    'gentoo': [
+    'Gentoo': [
         '         \u001b[35;1m-/oyddmdhs+:.\u001b[00;1m\t\t\t',
         '     \u001b[35;1m-o\u001b[00;1mdNMMMMMMMMNNmhy+\u001b[35;1m-`\u001b[00;0m\t\t',
         '   \u001b[35;1m-y\u001b[00;1mNMMMMMMMMMMMNNNmmdhy\u001b[35;1m+-\u001b[00;0m\t\t',
@@ -128,7 +128,7 @@ logo = {
         '\u001b[35;1m/h\u001b[00;1mMMNNNNNNNNMNdhs++/\u001b[35;1m-`\u001b[00;0m\t\t\t',
         '\u001b[35;1m`/\u001b[00;1mohdmmddhys+++/:\u001b[35;1m.`\u001b[00;0m\t\t\t',
         '  \u001b[35;1m`-//////:--.\u001b[00;1m\t\t\t\t'],
-    'manjaro': [
+    'Manjaro': [
         '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
         '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
         '\u001b[32;1m██████████████████\u001b[00;1m  \u001b[32;1m████████\t',
@@ -143,7 +143,7 @@ logo = {
         '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
         '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
         '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t'],
-    'ubuntu': [
+    'Ubuntu': [
         '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t',
         '        \u001b[31;1m`:+ssssssssssssssssss+:`\u001b[00;1m\t\t',
         '      \u001b[31;1m-+ssssssssssssssssssyyssss+-\u001b[00;1m\t\t',
@@ -166,19 +166,19 @@ logo = {
         '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t']
 }
 
-print(logo[os.uname()[1]][0] + color[os.uname()[1]] + username + color["normal"] + '@' + color[os.uname()[1]] + os.uname()[1] + color["normal"])
-print(logo[os.uname()[1]][1] + ('-' * len(username + '@' + os.uname()[1])))
-print(logo[os.uname()[1]][2] + color[os.uname()[1]] + 'OS' + color["normal"] + ':', osname, arch)
-print(logo[os.uname()[1]][3] + color[os.uname()[1]] + 'Kernel' + color["normal"] + ':', kernel)
-print(logo[os.uname()[1]][4] + color[os.uname()[1]] + 'Uptime' + color["normal"] + ': %s' % secs_to_other(uptime))
-print(logo[os.uname()[1]][5] + color[os.uname()[1]] + 'Shell' + color["normal"] + ':', shell)
-print(logo[os.uname()[1]][6] + color[os.uname()[1]] + 'Editor' + color["normal"] + ':', editor)
-print(logo[os.uname()[1]][7] + color[os.uname()[1]] + 'Language' + color["normal"] + ':', lang)
-print(logo[os.uname()[1]][8] + color[os.uname()[1]] + 'Encoding' + color["normal"] + ':', encoding)
-print(logo[os.uname()[1]][9] + color[os.uname()[1]] + 'Python version' + color["normal"] + ':', pythonv)
-print(logo[os.uname()[1]][10] + color[os.uname()[1]] + 'CPU' + color["normal"] + ':', '(' + str(cpu_number) + ')', '@', str(cpu_current_clock) + 'GHz', '/', str(cpu_max_clock) + 'GHz')
-print(logo[os.uname()[1]][11] + color[os.uname()[1]] + 'Memory' + color["normal"] + ':', convert(used_ram), '/', convert(ram), str(ram_percent) + '%')
-print(logo[os.uname()[1]][12] + color[os.uname()[1]] + 'Swap' + color["normal"] + ':', convert(used_swap), '/', convert(swap), str(swap_percent) + '%')
-print(logo[os.uname()[1]][13] + color[os.uname()[1]] + 'Battery' + color["normal"] + ':', batt_stat)
-for i in range(14, len(logo[os.uname()[1]])):
-    print(logo[os.uname()[1]][i])
+print(logo[distro.linux_distribution()[0]][0] + color[distro.linux_distribution()[0]] + username + color["normal"] + '@' + color[distro.linux_distribution()[0]] + os.uname()[1] + color["normal"])
+print(logo[distro.linux_distribution()[0]][1] + ('-' * len(username + '@' + os.uname()[1])))
+print(logo[distro.linux_distribution()[0]][2] + color[distro.linux_distribution()[0]] + 'OS' + color["normal"] + ':', osname, arch)
+print(logo[distro.linux_distribution()[0]][3] + color[distro.linux_distribution()[0]] + 'Kernel' + color["normal"] + ':', kernel)
+print(logo[distro.linux_distribution()[0]][4] + color[distro.linux_distribution()[0]] + 'Uptime' + color["normal"] + ': %s' % secs_to_other(uptime))
+print(logo[distro.linux_distribution()[0]][5] + color[distro.linux_distribution()[0]] + 'Shell' + color["normal"] + ':', shell)
+print(logo[distro.linux_distribution()[0]][6] + color[distro.linux_distribution()[0]] + 'Editor' + color["normal"] + ':', editor)
+print(logo[distro.linux_distribution()[0]][7] + color[distro.linux_distribution()[0]] + 'Language' + color["normal"] + ':', lang)
+print(logo[distro.linux_distribution()[0]][8] + color[distro.linux_distribution()[0]] + 'Encoding' + color["normal"] + ':', encoding)
+print(logo[distro.linux_distribution()[0]][9] + color[distro.linux_distribution()[0]] + 'Python version' + color["normal"] + ':', pythonv)
+print(logo[distro.linux_distribution()[0]][10] + color[distro.linux_distribution()[0]] + 'CPU' + color["normal"] + ':', '(' + str(cpu_number) + ')', '@', str(cpu_current_clock) + 'GHz', '/', str(cpu_max_clock) + 'GHz')
+print(logo[distro.linux_distribution()[0]][11] + color[distro.linux_distribution()[0]] + 'Memory' + color["normal"] + ':', convert(used_ram), '/', convert(ram), str(ram_percent) + '%')
+print(logo[distro.linux_distribution()[0]][12] + color[distro.linux_distribution()[0]] + 'Swap' + color["normal"] + ':', convert(used_swap), '/', convert(swap), str(swap_percent) + '%')
+print(logo[distro.linux_distribution()[0]][13] + color[distro.linux_distribution()[0]] + 'Battery' + color["normal"] + ':', batt_stat)
+for i in range(14, len(logo[distro.linux_distribution()[0]])):
+    print(logo[distro.linux_distribution()[0]][i])
