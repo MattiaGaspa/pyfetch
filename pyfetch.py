@@ -50,15 +50,14 @@ values = {'username': 'os.environ[\'USER\']',
 
 for value in open('/etc/pyfetch/pyfetch.conf').readlines():
     if value.find(' = ') != -1:
-        if not (value.split(' = ')[1].replace('\n', '') == 'auto' or value.split(' = ')[1].replace('\n', '') == 'yes'):
-            values[value.split(' = ')[0]] = value.split(' = ')[1].replace('\n', '')
+        if value.split(' = ')[1].replace('\n', '') == 'auto' or value.split(' = ')[1].replace('\n', '') == 'yes':
+            exec(value.split(' = ')[0] + ' = ' + values[value.split(' = ')[0]])
+        elif value.split(' = ')[1].replace('\n', '') == 'no':
+            exec(value.split(' = ')[0] + ' = no')
+        else:
+            exec(value.split(' = ')[0] + ' = "' + value.split(' = ')[1].replace('\n', '') + '"')
 
-'''
-if psutil.sensors_battery().power_plugged:
-    batt_stat = 'plugged ({}%)'.format(int(psutil.sensors_battery().percent))
-else:
-    batt_stat = str(int(psutil.sensors_battery().percent)) + '% (' + secs_to_other(psutil.sensors_battery().secsleft) + 'left)'
-'''
+
 color = {
     'normal': '\u001b[00;0m',
     'Arch': '\u001b[36;1m',
@@ -165,22 +164,50 @@ logo = {
         '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t']
 }
 
-print(logo[eval(values['os_name'])][0] + color[eval(values['os_name'])] + eval(values['username']) + color["normal"] + '@' + color[eval(values['os_name'])] + eval(values['nodename']) + color["normal"])
-print(logo[eval(values['os_name'])][1] + ('-' * len(eval(values['username']) + eval(values['nodename']) + ' ')))
-print(logo[eval(values['os_name'])][2] + color[eval(values['os_name'])] + 'OS' + color["normal"] + ':', eval(values['os_name']) + '/Linux', 'v' + eval(values['os_version']), eval(values['arch']))
-print(logo[eval(values['os_name'])][3] + color[eval(values['os_name'])] + 'Kernel' + color["normal"] + ':', eval(values['kernel']))
-print(logo[eval(values['os_name'])][4] + color[eval(values['os_name'])] + 'Uptime' + color["normal"] + ':', eval(values['uptime']))
-print(logo[eval(values['os_name'])][5] + color[eval(values['os_name'])] + 'Shell' + color["normal"] + ':', eval(values['shell']))
-print(logo[eval(values['os_name'])][6] + color[eval(values['os_name'])] + 'Editor' + color["normal"] + ':', eval(values['editor']))
-print(logo[eval(values['os_name'])][7] + color[eval(values['os_name'])] + 'Language' + color["normal"] + ':', eval(values['lang']))
-print(logo[eval(values['os_name'])][8] + color[eval(values['os_name'])] + 'Encoding' + color["normal"] + ':', eval(values['encoding']))
-print(logo[eval(values['os_name'])][9] + color[eval(values['os_name'])] + 'Python version' + color["normal"] + ':', eval(values['pythonv']))
-print(logo[eval(values['os_name'])][10] + color[eval(values['os_name'])] + 'CPU' + color["normal"] + ':', eval(values['cpu']), '(' + str(eval(values['cpu_number'])) + ')', '@', str(eval(values['cpu_current_clock'])) + 'GHz', '/', str(eval(values['cpu_max_clock'])) + 'GHz')
-print(logo[eval(values['os_name'])][11] + color[eval(values['os_name'])] + 'Memory' + color["normal"] + ':', eval(values['used_ram']), '/', eval(values['ram']), str(eval(values['ram_percent'])) + '%')
-print(logo[eval(values['os_name'])][12] + color[eval(values['os_name'])] + 'Swap' + color["normal"] + ':', eval(values['used_swap']), '/', eval(values['swap']), str(eval(values['swap_percent'])) + '%')
-if psutil.sensors_battery().power_plugged:
-    print(logo[eval(values['os_name'])][13] + color[eval(values['os_name'])] + 'Battery' + color["normal"] + ':', 'Plugged', '(' + str(eval(values['batt_percentage'])) + '%)')
-else:
-    print(logo[eval(values['os_name'])][13] + color[eval(values['os_name'])] + 'Battery' + color["normal"] + ':', str(eval(values['batt_percentage'])) + '%', '(' + eval(values['batt_time_left']) + 'left)')
-for i in range(14, len(logo[eval(values['os_name'])])):
-    print(logo[eval(values['os_name'])][i])
+line = 0
+print(logo[os_name][line] + color[os_name] + username + color["normal"] + '@' + color[os_name] + nodename + color["normal"])
+line += 1
+print(logo[os_name][line] + ('-' * len(username + nodename) + ' '))
+line += 1
+if os_name != 'no':
+    print(logo[os_name][line] + color[os_name] + 'OS' + color["normal"] + ':', os_name + '/Linux', 'v' + os_version, arch)
+    line += 1
+if kernel != 'no':
+    print(logo[os_name][line] + color[os_name] + 'Kernel' + color["normal"] + ':', kernel)
+    line += 1
+if uptime != 'no':
+    print(logo[os_name][line] + color[os_name] + 'Uptime' + color["normal"] + ':', uptime)
+    line += 1
+if shell != 'no':
+    print(logo[os_name][line] + color[os_name] + 'Shell' + color["normal"] + ':', shell)
+    line += 1
+if editor != 'no':
+    print(logo[os_name][line] + color[os_name] + 'Editor' + color["normal"] + ':', editor)
+    line += 1
+if lang != 'no':
+    print(logo[os_name][line] + color[os_name] + 'Language' + color["normal"] + ':', lang)
+    line += 1
+if encoding != 'no':
+    print(logo[os_name][line] + color[os_name] + 'Encoding' + color["normal"] + ':', encoding)
+    line += 1
+if pythonv != 'no':
+    print(logo[os_name][line] + color[os_name] + 'Python version' + color["normal"] + ':', pythonv)
+    line += 1
+if cpu != 'no' or values['cpu_number'] != 'no' or value['cpu_current_clock'] != 'no' or value['cpu_max_clock'] != 'no':
+    print(logo[os_name][line] + color[os_name] + 'CPU' + color["normal"] + ':', cpu, '(' + str(cpu_number) + ')', '@', str(cpu_current_clock) + 'GHz', '/', str(cpu_max_clock) + 'GHz')
+    line += 1
+if ram != 'no' or values['used_ram'] != 'no' or value['ram_percent'] != 'no':
+    print(logo[os_name][line] + color[os_name] + 'Memory' + color["normal"] + ':', str(used_ram), '/', str(ram), str(ram_percent) + '%')
+    line += 1
+if swap != 'no' or values['used_swap'] != 'no' or value['swap_percent'] != 'no':
+    print(logo[os_name][line] + color[os_name] + 'Swap' + color["normal"] + ':', str(used_swap), '/', str(swap), str(swap_percent) + '%')
+    line += 1
+if batt_percentage != 'no' or batt_time_left != 'no':
+    if psutil.sensors_battery().power_plugged:
+        print(logo[os_name][line] + color[os_name] + 'Battery' + color["normal"] + ':', 'Plugged', '(' + str(batt_percentage) + '%)')
+        line += 1
+    else:
+        print(logo[os_name][line] + color[os_name] + 'Battery' + color["normal"] + ':', str(batt_percentage) + '%', '(' + str(batt_time_left) + 'left)')
+        line += 1
+for i in range(line, len(logo[os_name])):
+    print(logo[os_name][i])
