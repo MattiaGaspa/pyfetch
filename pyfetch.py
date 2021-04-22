@@ -53,7 +53,7 @@ for value in open('/etc/pyfetch/pyfetch.conf').readlines():
         if value.split(' = ')[1].replace('\n', '') == 'auto' or value.split(' = ')[1].replace('\n', '') == 'yes':
             exec(value.split(' = ')[0] + ' = ' + values[value.split(' = ')[0]])
         elif value.split(' = ')[1].replace('\n', '') == 'no':
-            exec(value.split(' = ')[0] + ' = no')
+            exec(value.split(' = ')[0] + ' = \'no\'')
         else:
             exec(value.split(' = ')[0] + ' = "' + value.split(' = ')[1].replace('\n', '') + '"')
 
