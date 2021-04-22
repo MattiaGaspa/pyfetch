@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import os, sys, psutil, distro
+import os, sys, psutil, distro, platform
 
 def secs_to_other(time):
     d = int(time / 86400)
@@ -35,6 +35,7 @@ values = {'username': 'os.environ[\'USER\']',
         'lang': 'os.environ[\'LANGUAGE\']',
         'encoding': 'os.device_encoding(0)',
         'pythonv': 'sys.version[0] + sys.version[1] + sys.version[2] + sys.version[3] + sys.version[4] + sys.version[5]',
+        'cpu': 'platform.processor()',
         'cpu_number': 'os.cpu_count()',
         'cpu_current_clock': 'int(psutil.cpu_freq().current)',
         'cpu_max_clock': 'psutil.cpu_freq().max',
@@ -174,7 +175,7 @@ print(logo[eval(values['os_name'])][6] + color[eval(values['os_name'])] + 'Edito
 print(logo[eval(values['os_name'])][7] + color[eval(values['os_name'])] + 'Language' + color["normal"] + ':', eval(values['lang']))
 print(logo[eval(values['os_name'])][8] + color[eval(values['os_name'])] + 'Encoding' + color["normal"] + ':', eval(values['encoding']))
 print(logo[eval(values['os_name'])][9] + color[eval(values['os_name'])] + 'Python version' + color["normal"] + ':', eval(values['pythonv']))
-print(logo[eval(values['os_name'])][10] + color[eval(values['os_name'])] + 'CPU' + color["normal"] + ':', '(' + str(eval(values['cpu_number'])) + ')', '@', str(eval(values['cpu_current_clock'])) + 'GHz', '/', str(eval(values['cpu_max_clock'])) + 'GHz')
+print(logo[eval(values['os_name'])][10] + color[eval(values['os_name'])] + 'CPU' + color["normal"] + ':', eval(values['cpu']), '(' + str(eval(values['cpu_number'])) + ')', '@', str(eval(values['cpu_current_clock'])) + 'GHz', '/', str(eval(values['cpu_max_clock'])) + 'GHz')
 print(logo[eval(values['os_name'])][11] + color[eval(values['os_name'])] + 'Memory' + color["normal"] + ':', eval(values['used_ram']), '/', eval(values['ram']), str(eval(values['ram_percent'])) + '%')
 print(logo[eval(values['os_name'])][12] + color[eval(values['os_name'])] + 'Swap' + color["normal"] + ':', eval(values['used_swap']), '/', eval(values['swap']), str(eval(values['swap_percent'])) + '%')
 if psutil.sensors_battery().power_plugged:
