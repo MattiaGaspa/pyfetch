@@ -1,38 +1,6 @@
 #!/usr/bin/python3
 import os, sys, psutil, distro
 
-username = os.environ['USER']
-
-osname = distro.linux_distribution()[0] + '/Linux ' + distro.linux_distribution()[1]
-
-arch = os.uname()[4]
-
-kernel = os.uname()[2]
-
-uptime = int(float(open('/proc/uptime').read().split(' ')[0]) - (float(open('/proc/uptime').read().split(' ')[0]) % 1))
-
-shell = os.environ['SHELL']
-
-editor = os.environ['EDITOR']
-
-lang = os.environ['LANGUAGE']
-
-encoding = os.device_encoding(0)
-
-pythonv = sys.version[0] + sys.version[1] + sys.version[2] + sys.version[3] + sys.version[4] + sys.version[5]
-
-cpu_number = os.cpu_count()
-cpu_current_clock = int(psutil.cpu_freq().current)
-cpu_max_clock = psutil.cpu_freq().max
-
-ram = psutil.virtual_memory().total
-used_ram = psutil.virtual_memory().used
-ram_percent = psutil.virtual_memory().percent
-
-swap = psutil.swap_memory().total
-used_swap = psutil.swap_memory().used
-swap_percent = psutil.swap_memory().percent
-
 def secs_to_other(time):
     d = int(time / 86400)
     h = int(time / 3600 % 24)
@@ -55,11 +23,41 @@ def convert(bytes):
         unitIndex += 1
     return f"{round(bytes)}{units[unitIndex]}"
 
+values = {'username': 'os.environ[\'USER\']',
+        'nodename': 'os.uname()[1]',
+        'os_name': 'distro.linux_distribution()[0]', 
+        'os_version': 'distro.linux_distribution()[1]',
+        'arch': 'os.uname()[4]',
+        'kernel': 'os.uname()[2]',
+        'uptime': 'secs_to_other(int(float(open(\'/proc/uptime\').read().split(' ')[0]) - (float(open(\'/proc/uptime\').read().split(\' \')[0]) % 1)))',
+        'shell': 'os.environ[\'SHELL\']',
+        'editor': 'os.environ[\'EDITOR\']', 
+        'lang': 'os.environ[\'LANGUAGE\']',
+        'encoding': 'os.device_encoding(0)',
+        'pythonv': 'sys.version[0] + sys.version[1] + sys.version[2] + sys.version[3] + sys.version[4] + sys.version[5]',
+        'cpu_number': 'os.cpu_count()',
+        'cpu_current_clock': 'int(psutil.cpu_freq().current)',
+        'cpu_max_clock': 'psutil.cpu_freq().max',
+        'ram': 'convert(psutil.virtual_memory().total)',
+        'used_ram': 'convert(psutil.virtual_memory().used)',
+        'ram_percent': 'psutil.virtual_memory().percent',
+        'swap': 'convert(psutil.swap_memory().total)',
+        'used_swap': 'convert(psutil.swap_memory().used)',
+        'swap_percent': 'psutil.swap_memory().percent',
+        'batt_percentage': 'int(psutil.sensors_battery().percent)',
+        'batt_time_left': 'secs_to_other(psutil.sensors_battery().secsleft)'}
+
+for value in open('/etc/pyfetch/pyfetch.conf').readlines():
+    if value.find(' = ') != -1:
+        if not (value.split(' = ')[1].replace('\n', '') == 'auto' or value.split(' = ')[1].replace('\n', '') == 'yes'):
+            values[value.split(' = ')[0]] = value.split(' = ')[1].replace('\n', '')
+
+'''
 if psutil.sensors_battery().power_plugged:
     batt_stat = 'plugged ({}%)'.format(int(psutil.sensors_battery().percent))
 else:
     batt_stat = str(int(psutil.sensors_battery().percent)) + '% (' + secs_to_other(psutil.sensors_battery().secsleft) + 'left)'
-
+'''
 color = {
     'normal': '\u001b[00;0m',
     'Arch': '\u001b[36;1m',
@@ -166,19 +164,22 @@ logo = {
         '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t']
 }
 
-print(logo[distro.linux_distribution()[0]][0] + color[distro.linux_distribution()[0]] + username + color["normal"] + '@' + color[distro.linux_distribution()[0]] + os.uname()[1] + color["normal"])
-print(logo[distro.linux_distribution()[0]][1] + ('-' * len(username + '@' + os.uname()[1])))
-print(logo[distro.linux_distribution()[0]][2] + color[distro.linux_distribution()[0]] + 'OS' + color["normal"] + ':', osname, arch)
-print(logo[distro.linux_distribution()[0]][3] + color[distro.linux_distribution()[0]] + 'Kernel' + color["normal"] + ':', kernel)
-print(logo[distro.linux_distribution()[0]][4] + color[distro.linux_distribution()[0]] + 'Uptime' + color["normal"] + ': %s' % secs_to_other(uptime))
-print(logo[distro.linux_distribution()[0]][5] + color[distro.linux_distribution()[0]] + 'Shell' + color["normal"] + ':', shell)
-print(logo[distro.linux_distribution()[0]][6] + color[distro.linux_distribution()[0]] + 'Editor' + color["normal"] + ':', editor)
-print(logo[distro.linux_distribution()[0]][7] + color[distro.linux_distribution()[0]] + 'Language' + color["normal"] + ':', lang)
-print(logo[distro.linux_distribution()[0]][8] + color[distro.linux_distribution()[0]] + 'Encoding' + color["normal"] + ':', encoding)
-print(logo[distro.linux_distribution()[0]][9] + color[distro.linux_distribution()[0]] + 'Python version' + color["normal"] + ':', pythonv)
-print(logo[distro.linux_distribution()[0]][10] + color[distro.linux_distribution()[0]] + 'CPU' + color["normal"] + ':', '(' + str(cpu_number) + ')', '@', str(cpu_current_clock) + 'GHz', '/', str(cpu_max_clock) + 'GHz')
-print(logo[distro.linux_distribution()[0]][11] + color[distro.linux_distribution()[0]] + 'Memory' + color["normal"] + ':', convert(used_ram), '/', convert(ram), str(ram_percent) + '%')
-print(logo[distro.linux_distribution()[0]][12] + color[distro.linux_distribution()[0]] + 'Swap' + color["normal"] + ':', convert(used_swap), '/', convert(swap), str(swap_percent) + '%')
-print(logo[distro.linux_distribution()[0]][13] + color[distro.linux_distribution()[0]] + 'Battery' + color["normal"] + ':', batt_stat)
-for i in range(14, len(logo[distro.linux_distribution()[0]])):
-    print(logo[distro.linux_distribution()[0]][i])
+print(logo[eval(values['os_name'])][0] + color[eval(values['os_name'])] + eval(values['username']) + color["normal"] + '@' + color[eval(values['os_name'])] + eval(values['nodename']) + color["normal"])
+print(logo[eval(values['os_name'])][1] + ('-' * len(eval(values['username']) + eval(values['nodename']) + ' ')))
+print(logo[eval(values['os_name'])][2] + color[eval(values['os_name'])] + 'OS' + color["normal"] + ':', eval(values['os_name']) + '/Linux', 'v' + eval(values['os_version']), eval(values['arch']))
+print(logo[eval(values['os_name'])][3] + color[eval(values['os_name'])] + 'Kernel' + color["normal"] + ':', eval(values['kernel']))
+print(logo[eval(values['os_name'])][4] + color[eval(values['os_name'])] + 'Uptime' + color["normal"] + ':', eval(values['uptime']))
+print(logo[eval(values['os_name'])][5] + color[eval(values['os_name'])] + 'Shell' + color["normal"] + ':', eval(values['shell']))
+print(logo[eval(values['os_name'])][6] + color[eval(values['os_name'])] + 'Editor' + color["normal"] + ':', eval(values['editor']))
+print(logo[eval(values['os_name'])][7] + color[eval(values['os_name'])] + 'Language' + color["normal"] + ':', eval(values['lang']))
+print(logo[eval(values['os_name'])][8] + color[eval(values['os_name'])] + 'Encoding' + color["normal"] + ':', eval(values['encoding']))
+print(logo[eval(values['os_name'])][9] + color[eval(values['os_name'])] + 'Python version' + color["normal"] + ':', eval(values['pythonv']))
+print(logo[eval(values['os_name'])][10] + color[eval(values['os_name'])] + 'CPU' + color["normal"] + ':', '(' + str(eval(values['cpu_number'])) + ')', '@', str(eval(values['cpu_current_clock'])) + 'GHz', '/', str(eval(values['cpu_max_clock'])) + 'GHz')
+print(logo[eval(values['os_name'])][11] + color[eval(values['os_name'])] + 'Memory' + color["normal"] + ':', eval(values['used_ram']), '/', eval(values['ram']), str(eval(values['ram_percent'])) + '%')
+print(logo[eval(values['os_name'])][12] + color[eval(values['os_name'])] + 'Swap' + color["normal"] + ':', eval(values['used_swap']), '/', eval(values['swap']), str(eval(values['swap_percent'])) + '%')
+if psutil.sensors_battery().power_plugged:
+    print(logo[eval(values['os_name'])][13] + color[eval(values['os_name'])] + 'Battery' + color["normal"] + ':', 'Plugged', '(' + str(eval(values['batt_percentage'])) + '%)')
+else:
+    print(logo[eval(values['os_name'])][13] + color[eval(values['os_name'])] + 'Battery' + color["normal"] + ':', str(eval(values['batt_percentage'])) + '%', '(' + eval(values['batt_time_left']) + 'left)')
+for i in range(14, len(logo[eval(values['os_name'])])):
+    print(logo[eval(values['os_name'])][i])
