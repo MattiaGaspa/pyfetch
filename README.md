@@ -12,7 +12,7 @@ sudo python3 setup.py install
 ```
 
 ## Customization
-In case you don't want to see some variables in the terminal or want to change the value of these (in case they are not shown correctly) you can edit the **/etc/pyfetch/pyfetch.conf** file. Here you can find all the variable, with the syntax (remember the space before and after the = character):
+In case you don't want to see some variables in the terminal or want to change the value of these (in case they are not shown correctly, in case of error they are automatically removed)) you can edit the **/etc/pyfetch/pyfetch.conf** file. Here you can find all the variable, with the syntax (remember the space before and after the = character):
 ```shell
 <variable name> = <his value>
 ```
