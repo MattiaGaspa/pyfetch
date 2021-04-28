@@ -51,7 +51,10 @@ values = {'username': 'os.environ[\'USER\']',
 for value in open('/etc/pyfetch/pyfetch.conf').readlines():
     if value.find(' = ') != -1:
         if value.split(' = ')[1].replace('\n', '') == 'auto' or value.split(' = ')[1].replace('\n', '') == 'yes':
-            exec(value.split(' = ')[0] + ' = ' + values[value.split(' = ')[0]])
+            try:
+                exec(value.split(' = ')[0] + ' = ' + values[value.split(' = ')[0]])
+            except:
+                exec(value.split(' = ')[0] + ' = \'no\'')
         elif value.split(' = ')[1].replace('\n', '') == 'no':
             exec(value.split(' = ')[0] + ' = \'no\'')
         else:
@@ -64,6 +67,7 @@ color = {
     'Debian': '\u001b[31;1m',
     'Gentoo': '\u001b[35;1m',
     'Manjaro': '\u001b[32;1m',
+    'Linux': '\u001b[00;0m',
     'Ubuntu': '\u001b[31;1m'
 }
 logo = {
@@ -141,6 +145,23 @@ logo = {
         '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
         '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t',
         '\u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\u001b[00;1m  \u001b[32;1m████████\t'],
+    'Linux': [
+        '        \u001b[30;1m#####\u001b[00;1m\t\t',
+        '       \u001b[30;1m#######\u001b[00;1m\t\t',
+        '       \u001b[30;1m##\u001b[00;1mO\u001b[30;1m#\u001b[00;1mO\u001b[30;1m##\u001b[00;1m\t\t',
+        '       \u001b[30;1m#\u001b[33;1m#####\u001b[30;1m#\u001b[00;1m\t\t',
+        '     \u001b[30;1m##\u001b[00;1m##\u001b[33;1m###\u001b[00;1m##\u001b[30;1m##\u001b[00;1m\t',
+        '    \u001b[30;1m#\u001b[00;1m##########\u001b[30;1m##\u001b[00;1m\t',
+        '   \u001b[30;1m#\u001b[00;1m############\u001b[30;1m##\u001b[00;1m\t',
+        '   \u001b[30;1m#\u001b[00;1m############\u001b[30;1m###\u001b[00;1m\t',
+        '  \u001b[33;1m##\u001b[30;1m#\u001b[00;1m###########\u001b[30;1m##\u001b[33;1m#\u001b[00;1m\t',
+        '\u001b[33;1m######\u001b[30;1m#\u001b[00;1m#######\u001b[30;1m#\u001b[33;1m######\u001b[00;1m\t',
+        '\u001b[33;1m#######\u001b[30;1m#\u001b[00;1m#####\u001b[30;1m#\u001b[33;1m#######\u001b[00;1m\t',
+        '  \u001b[33;1m#####\u001b[30;1m#######\u001b[33;1m#####\u001b[00;1m\t',
+        '\t\t\t',
+        '\t\t\t',
+        '\t\t\t',
+        '\t\t\t'],
     'Ubuntu': [
         '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t',
         '        \u001b[31;1m`:+ssssssssssssssssss+:`\u001b[00;1m\t\t',
@@ -164,50 +185,57 @@ logo = {
         '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t']
 }
 
+if os_name in logo:
+    os_logo = logo[os_name]
+    os_color = color[os_name]
+else:
+    os_logo = logo['Linux']
+    os_color = color['Linux']
+
 line = 0
-print(logo[os_name][line] + color[os_name] + username + color["normal"] + '@' + color[os_name] + nodename + color["normal"])
+print(os_logo[line] + os_color + username + color["normal"] + '@' + os_color + nodename + color["normal"])
 line += 1
-print(logo[os_name][line] + ('-' * len(username + nodename) + ' '))
+print(os_logo[line] + ('-' * len(username + nodename) + ' '))
 line += 1
 if os_name != 'no':
-    print(logo[os_name][line] + color[os_name] + 'OS' + color["normal"] + ':', os_name + '/Linux', 'v' + os_version, arch)
+    print(os_logo[line] + os_color + 'OS' + color["normal"] + ':', os_name + '/Linux', 'v' + os_version, arch)
     line += 1
 if kernel != 'no':
-    print(logo[os_name][line] + color[os_name] + 'Kernel' + color["normal"] + ':', kernel)
+    print(os_logo[line] + os_color + 'Kernel' + color["normal"] + ':', kernel)
     line += 1
 if uptime != 'no':
-    print(logo[os_name][line] + color[os_name] + 'Uptime' + color["normal"] + ':', uptime)
+    print(os_logo[line] + os_color + 'Uptime' + color["normal"] + ':', uptime)
     line += 1
 if shell != 'no':
-    print(logo[os_name][line] + color[os_name] + 'Shell' + color["normal"] + ':', shell)
+    print(os_logo[line] + os_color + 'Shell' + color["normal"] + ':', shell)
     line += 1
 if editor != 'no':
-    print(logo[os_name][line] + color[os_name] + 'Editor' + color["normal"] + ':', editor)
+    print(os_logo[line] + os_color + 'Editor' + color["normal"] + ':', editor)
     line += 1
 if lang != 'no':
-    print(logo[os_name][line] + color[os_name] + 'Language' + color["normal"] + ':', lang)
+    print(os_logo[line] + os_color + 'Language' + color["normal"] + ':', lang)
     line += 1
 if encoding != 'no':
-    print(logo[os_name][line] + color[os_name] + 'Encoding' + color["normal"] + ':', encoding)
+    print(os_logo[line] + os_color + 'Encoding' + color["normal"] + ':', encoding)
     line += 1
 if pythonv != 'no':
-    print(logo[os_name][line] + color[os_name] + 'Python version' + color["normal"] + ':', pythonv)
+    print(os_logo[line] + os_color + 'Python version' + color["normal"] + ':', pythonv)
     line += 1
 if cpu != 'no' or values['cpu_number'] != 'no' or value['cpu_current_clock'] != 'no' or value['cpu_max_clock'] != 'no':
-    print(logo[os_name][line] + color[os_name] + 'CPU' + color["normal"] + ':', cpu, '(' + str(cpu_number) + ')', '@', str(cpu_current_clock) + 'GHz', '/', str(cpu_max_clock) + 'GHz')
+    print(os_logo[line] + os_color + 'CPU' + color["normal"] + ':', cpu, '(' + str(cpu_number) + ')', '@', str(cpu_current_clock) + 'GHz', '/', str(cpu_max_clock) + 'GHz')
     line += 1
 if ram != 'no' or values['used_ram'] != 'no' or value['ram_percent'] != 'no':
-    print(logo[os_name][line] + color[os_name] + 'Memory' + color["normal"] + ':', str(used_ram), '/', str(ram), str(ram_percent) + '%')
+    print(os_logo[line] + os_color + 'Memory' + color["normal"] + ':', str(used_ram), '/', str(ram), str(ram_percent) + '%')
     line += 1
 if swap != 'no' or values['used_swap'] != 'no' or value['swap_percent'] != 'no':
-    print(logo[os_name][line] + color[os_name] + 'Swap' + color["normal"] + ':', str(used_swap), '/', str(swap), str(swap_percent) + '%')
+    print(os_logo[line] + os_color + 'Swap' + color["normal"] + ':', str(used_swap), '/', str(swap), str(swap_percent) + '%')
     line += 1
 if batt_percentage != 'no' or batt_time_left != 'no':
     if psutil.sensors_battery().power_plugged:
-        print(logo[os_name][line] + color[os_name] + 'Battery' + color["normal"] + ':', 'Plugged', '(' + str(batt_percentage) + '%)')
+        print(os_logo[line] + os_color + 'Battery' + color["normal"] + ':', 'Plugged', '(' + str(batt_percentage) + '%)')
         line += 1
     else:
-        print(logo[os_name][line] + color[os_name] + 'Battery' + color["normal"] + ':', str(batt_percentage) + '%', '(' + str(batt_time_left) + 'left)')
+        print(os_logo[line] + os_color + 'Battery' + color["normal"] + ':', str(batt_percentage) + '%', '(' + str(batt_time_left) + 'left)')
         line += 1
-for i in range(line, len(logo[os_name])):
-    print(logo[os_name][i])
+for i in range(line, len(os_logo)):
+    print(os_logo[i])
