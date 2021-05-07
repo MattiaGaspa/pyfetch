@@ -7,6 +7,8 @@ def help():
 
 try:
     if sys.argv[1] == 'install':
+        print('Installing needed python modules...')
+        os.system('pip3 install -r requirements.txt')
         print('Installing pyfetch...')
         os.system('cp pyfetch.py /usr/bin/pyfetch')
         print('Changing permission for /usr/bin/pyfetch...')
