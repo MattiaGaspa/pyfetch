@@ -1,4 +1,4 @@
-# pyfetch
+# PYFETCH
 ![alt text](https://github.com/MattiaG-afk/pyfetch/blob/main/pyfetch.png)
 
 A revisited python version of neofetch
