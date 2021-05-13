@@ -68,11 +68,15 @@ color = {
     'Elementary': '\u001b[94;1m',
     'Fedora': '\u001b[34;1m',
     'Gentoo': '\u001b[35;1m',
+    'KaOS': 'gg',
     'Linux': '\u001b[00;1m',
     'Manjaro': '\u001b[32;1m',
     'Mint': '\u001b[32;1m',
+    'OpenSUSE': 'gg',
+    'Slackware': 'gg',
     'Solus': '\u001b[94;1m',
-    'Ubuntu': '\u001b[31;1m'
+    'Ubuntu': '\u001b[31;1m',
+    'Void': 'gg'
 }
 logo = {
     'Arch': [
@@ -169,6 +173,8 @@ logo = {
         '\u001b[35;1m/h\u001b[00;1mMMNNNNNNNNMNdhs++/\u001b[35;1m-`\u001b[00;0m\t\t\t',
         '\u001b[35;1m`/\u001b[00;1mohdmmddhys+++/:\u001b[35;1m.`\u001b[00;0m\t\t\t',
         '  \u001b[35;1m`-//////:--.\u001b[00;1m\t\t\t\t'],
+    'KaOS': [
+        'gg'],
     'Linux': [
         '        \u001b[30;1m#####\u001b[00;1m\t\t',
         '       \u001b[30;1m#######\u001b[00;1m\t\t',
@@ -221,6 +227,10 @@ logo = {
         '       \u001b[00;1m\'.-MMMM\u001b[32;1m``--:::::--``\u001b[00;1mMMMM-.\'\t\t',
         '            \u001b[00;1m\'-MMMMMMMMMMMMM-\'\t\t\t',
         '               \u001b[00;1m``-:::::-``\t\t\t'],
+    'OpenSUSE': [
+        'gg'],
+    'Slackware': [
+        'gg'],
     'Solus': [
         '            \u001b[00;0m-```````````\t\t',
         '          \u001b[00;0m`-+/------------.`\t\t',
@@ -262,7 +272,9 @@ logo = {
         '    \u001b[31;1m.ossssssssssssssssss\u001b[00;1mdMMMNy\u001b[31;1msssso.\u001b[00;1m\t\t',
         '      \u001b[31;1m-+sssssssssssssssss\u001b[00;1myyy\u001b[31;1mssss+-\u001b[00;1m\t\t',
         '        \u001b[31;1m`:+ssssssssssssssssss+:`\u001b[00;1m\t\t',
-        '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t']
+        '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t'],
+    'Void': [
+        'gg']
 }
 
 if os_name in logo:
