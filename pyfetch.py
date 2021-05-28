@@ -71,8 +71,10 @@ color = {
     'Linux': '\u001b[00;1m',
     'Manjaro': '\u001b[32;1m',
     'Mint': '\u001b[32;1m',
+    'Slackware': '\u001b[94;1m',
     'Solus': '\u001b[94;1m',
-    'Ubuntu': '\u001b[31;1m'
+    'Ubuntu': '\u001b[31;1m',
+    'Void': '\u001b[32;1m'
 }
 logo = {
     'Arch': [
@@ -242,6 +244,28 @@ logo = {
         '      \u001b[94;1m`:+ssssssssssssssssssss+-\u001b[00;0m\t\t',
         '         \u001b[94;1m`-/+ssssssssssso+/-`\u001b[00;0m\t\t',
         '              \u001b[94;1m`.-----..`\u001b[00;0m\t\t'],
+    'Slackware': [
+        '                  \u001b[94;1m:::::::\u001b[00;1m\t\t\t',
+        '            \u001b[94;1m:::::::::::::::::::\u001b[00;1m\t\t\t',
+        '         \u001b[94;1m:::::::::::::::::::::::::\u001b[00;1m\t\t',
+        '       \u001b[94;1m::::::::\u001b[00;1mcllcccccllllllll\u001b[94;1m::::::\u001b[00;1m\t\t',
+        '    \u001b[94;1m:::::::::\u001b[00;1mlc               dc\u001b[94;1m:::::::\u001b[00;1m\t\t',
+        '   \u001b[94;1m::::::::\u001b[00;1mcl   clllccllll    oc\u001b[94;1m:::::::::\u001b[00;1m\t',
+        '  \u001b[94;1m:::::::::\u001b[00;1mo   lc\u001b[94;1m::::::::\u001b[00;1mco   oc\u001b[94;1m::::::::::\u001b[00;1m\t',
+        ' \u001b[94;1m::::::::::\u001b[00;1mo    cccclc\u001b[94;1m:::::\u001b[00;1mclcc\u001b[94;1m::::::::::::\u001b[00;1m\t',
+        ' \u001b[94;1m:::::::::::\u001b[00;1mlc        cclccclc\u001b[94;1m:::::::::::::\u001b[00;1m\t',
+        '\u001b[94;1m::::::::::::::\u001b[00;1mlcclcc          lc\u001b[94;1m::::::::::::\u001b[00;1m\t',
+        '\u001b[94;1m::::::::::\u001b[00;1mcclcc\u001b[94;1m:::::\u001b[00;1mlccclc     oc\u001b[94;1m:::::::::::\u001b[00;1m\t',
+        '\u001b[94;1m::::::::::\u001b[00;1mo    l\u001b[94;1m::::::::::\u001b[00;1ml    lc\u001b[94;1m:::::::::::\u001b[00;1m\t',
+        ' \u001b[94;1m:::::\u001b[00;1mcll\u001b[94;1m:\u001b[00;1mo     clcllcccll     o\u001b[94;1m:::::::::::\u001b[00;1m\t',
+        ' \u001b[94;1m:::::\u001b[00;1mocc\u001b[94;1m:\u001b[00;1mo                  clc\u001b[94;1m:::::::::::\u001b[00;1m\t',
+        '  \u001b[94;1m::::\u001b[00;1mocl\u001b[94;1m:\u001b[00;1mccslclccclclccclclc\u001b[94;1m:::::::::::::\u001b[00;1m\t',
+        '   \u001b[94;1m:::\u001b[00;1moclcccccccccccccllllllllllllll\u001b[94;1m:::::\u001b[00;1m\t',
+        '    \u001b[94;1m::\u001b[00;1mlcc1lcccccccccccccccccccccccco\u001b[94;1m::::\u001b[00;1m\t',
+        '      \u001b[94;1m::::::::::::::::::::::::::::::::\u001b[00;1m\t\t',
+        '        \u001b[94;1m::::::::::::::::::::::::::::\u001b[00;1m\t\t',
+        '           \u001b[94;1m::::::::::::::::::::::\u001b[00;1m\t\t',
+        '                \u001b[94;1m::::::::::::\u001b[00;1m\t\t\t'],
     'Ubuntu': [
         '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t',
         '        \u001b[31;1m`:+ssssssssssssssssss+:`\u001b[00;1m\t\t',
@@ -262,7 +286,26 @@ logo = {
         '    \u001b[31;1m.ossssssssssssssssss\u001b[00;1mdMMMNy\u001b[31;1msssso.\u001b[00;1m\t\t',
         '      \u001b[31;1m-+sssssssssssssssss\u001b[00;1myyy\u001b[31;1mssss+-\u001b[00;1m\t\t',
         '        \u001b[31;1m`:+ssssssssssssssssss+:`\u001b[00;1m\t\t',
-        '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t']
+        '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t'],
+    'Void': [
+        '                \u001b[32;1m__.;=====;.__\t\t\t',
+        '            \u001b[32;1m_.=+==++=++=+=+===;.\t\t',
+        '             \u001b[32;1m-=+++=+===+=+=+++++=_\t\t',
+        '        \u001b[32;1m.     -=:``     `--==+=++==.\t\t',
+        '       \u001b[32;1m_vi,    `            --+=++++:\t\t',
+        '      \u001b[32;1m.uvnvi.       _._       -==+==+.\t\t',
+        '     \u001b[32;1m.vvnvnI`    .;==|==;.     :|=||=|.\t\t',
+        '\u001b[90;1m+QmQQm\u001b[32;1mpvvnv; \u001b[90;1m_yYsyQQWUUQQQm #QmQ#\u001b[32;1m:\u001b[90;1mQQQWUV$QQm.\t',
+        '\'\u001b[90;1m -QQWQW\u001b[32;1mpvvo\u001b[90;1mwZ?.wQQQE\u001b[32;1m==<\u001b[90;1mQWWQ/QWQW.QQWW\u001b[32;1m(: \u001b[90;1mjQWQE\'\t',
+        '\u001b[90;1m  -$QQQQmmU\'  jQQQ@\u001b[32;1m+=<\u001b[90;1mQWQQ)mQQQ.mQQQC\u001b[32;1m+;\u001b[90;1mjWQQ@\'\t',
+        '\u001b[90;1m   -$WQ8Y\u001b[32;1mnI:   \u001b[90;1mQWQQwgQQWV\u001b[32;1m`\u001b[90;1mmWQQ.jQWQQgyyWW@!\t',
+        '\u001b[32;1m     -1vvnvv.     `~+++`        ++|+++\t\t',
+        '      \u001b[32;1m+vnvnnv,                 `-|===\t\t',
+        '       \u001b[32;1m+vnvnvns.           .      :=-\t\t',
+        '        \u001b[32;1m-Invnvvnsi..___..=sv=.     `\t\t',
+        '          \u001b[32;1m+Invnvnvnnnnnnnnvvnn;.\t\t',
+        '            \u001b[32;1m~|Invnvnvvnvvvnnv}+`\t\t',
+        '               \u001b[32;1m-~|{*l}*|~\t\t\t']
 }
 
 if os_name in logo:
@@ -275,7 +318,7 @@ else:
 line = 0
 print(os_logo[line] + os_color + username + color["normal"] + '@' + os_color + nodename + color["normal"])
 line += 1
-print(os_logo[line] + ('-' * (len(username + nodename) + 1)))
+print(os_logo[line] + color["normal"] + ('-' * (len(username + nodename) + 1)))
 line += 1
 if os_name != 'no':
     print(os_logo[line] + os_color + 'OS' + color["normal"] + ':', os_name + '/Linux', 'v' + os_version, arch)
