@@ -73,7 +73,8 @@ color = {
     'Mint': '\u001b[32;1m',
     'Slackware': '\u001b[94;1m',
     'Solus': '\u001b[94;1m',
-    'Ubuntu': '\u001b[31;1m'
+    'Ubuntu': '\u001b[31;1m',
+    'Void': '\u001b[32;1m'
 }
 logo = {
     'Arch': [
@@ -285,7 +286,26 @@ logo = {
         '    \u001b[31;1m.ossssssssssssssssss\u001b[00;1mdMMMNy\u001b[31;1msssso.\u001b[00;1m\t\t',
         '      \u001b[31;1m-+sssssssssssssssss\u001b[00;1myyy\u001b[31;1mssss+-\u001b[00;1m\t\t',
         '        \u001b[31;1m`:+ssssssssssssssssss+:`\u001b[00;1m\t\t',
-        '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t']
+        '            \u001b[31;1m.-/+oossssoo+/-.\u001b[00;1m\t\t\t'],
+    'Void': [
+        '                \u001b[32;1m__.;=====;.__\t\t\t',
+        '            \u001b[32;1m_.=+==++=++=+=+===;.\t\t',
+        '             \u001b[32;1m-=+++=+===+=+=+++++=_\t\t',
+        '        \u001b[32;1m.     -=:``     `--==+=++==.\t\t',
+        '       \u001b[32;1m_vi,    `            --+=++++:\t\t',
+        '      \u001b[32;1m.uvnvi.       _._       -==+==+.\t\t',
+        '     \u001b[32;1m.vvnvnI`    .;==|==;.     :|=||=|.\t\t',
+        '\u001b[90;1m+QmQQm\u001b[32;1mpvvnv; \u001b[90;1m_yYsyQQWUUQQQm #QmQ#\u001b[32;1m:\u001b[90;1mQQQWUV$QQm.\t',
+        '\'\u001b[90;1m -QQWQW\u001b[32;1mpvvo\u001b[90;1mwZ?.wQQQE\u001b[32;1m==<\u001b[90;1mQWWQ/QWQW.QQWW\u001b[32;1m(: \u001b[90;1mjQWQE\'\t',
+        '\u001b[90;1m  -$QQQQmmU\'  jQQQ@\u001b[32;1m+=<\u001b[90;1mQWQQ)mQQQ.mQQQC\u001b[32;1m+;\u001b[90;1mjWQQ@\'\t',
+        '\u001b[90;1m   -$WQ8Y\u001b[32;1mnI:   \u001b[90;1mQWQQwgQQWV\u001b[32;1m`\u001b[90;1mmWQQ.jQWQQgyyWW@!\t',
+        '\u001b[32;1m     -1vvnvv.     `~+++`        ++|+++\t\t',
+        '      \u001b[32;1m+vnvnnv,                 `-|===\t\t',
+        '       \u001b[32;1m+vnvnvns.           .      :=-\t\t',
+        '        \u001b[32;1m-Invnvvnsi..___..=sv=.     `\t\t',
+        '          \u001b[32;1m+Invnvnvnnnnnnnnvvnn;.\t\t',
+        '            \u001b[32;1m~|Invnvnvvnvvvnnv}+`\t\t',
+        '               \u001b[32;1m-~|{*l}*|~\t\t\t']
 }
 
 if os_name in logo:
